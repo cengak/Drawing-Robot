@@ -1,0 +1,170 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    BLACK
+    BLUE
+    COLOR
+    GREEN
+    LOOP
+    PEN
+    RIGHT
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> function value option
+Rule 2     option -> statement
+Rule 3     option -> loop
+Rule 4     option -> EMPTY
+Rule 5     function -> FORW
+Rule 6     value -> NUMBER
+Rule 7     colors -> RED
+Rule 8     loop -> LSQB statement RSQB
+
+Terminals, with rules where they appear
+
+BLACK                : 
+BLUE                 : 
+COLOR                : 
+EMPTY                : 4
+FORW                 : 5
+GREEN                : 
+LOOP                 : 
+LSQB                 : 8
+NUMBER               : 6
+PEN                  : 
+RED                  : 7
+RIGHT                : 
+RSQB                 : 8
+error                : 
+
+Nonterminals, with rules where they appear
+
+colors               : 
+function             : 1
+loop                 : 3
+option               : 1
+statement            : 2 8 0
+value                : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . function value option
+    (5) function -> . FORW
+
+    FORW            shift and go to state 3
+
+    statement                      shift and go to state 1
+    function                       shift and go to state 2
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> function . value option
+    (6) value -> . NUMBER
+
+    NUMBER          shift and go to state 5
+
+    value                          shift and go to state 4
+
+state 3
+
+    (5) function -> FORW .
+
+    NUMBER          reduce using rule 5 (function -> FORW .)
+
+
+state 4
+
+    (1) statement -> function value . option
+    (2) option -> . statement
+    (3) option -> . loop
+    (4) option -> . EMPTY
+    (1) statement -> . function value option
+    (8) loop -> . LSQB statement RSQB
+    (5) function -> . FORW
+
+    EMPTY           shift and go to state 9
+    LSQB            shift and go to state 10
+    FORW            shift and go to state 3
+
+    function                       shift and go to state 2
+    option                         shift and go to state 6
+    statement                      shift and go to state 7
+    loop                           shift and go to state 8
+
+state 5
+
+    (6) value -> NUMBER .
+
+    EMPTY           reduce using rule 6 (value -> NUMBER .)
+    LSQB            reduce using rule 6 (value -> NUMBER .)
+    FORW            reduce using rule 6 (value -> NUMBER .)
+
+
+state 6
+
+    (1) statement -> function value option .
+
+    $end            reduce using rule 1 (statement -> function value option .)
+    RSQB            reduce using rule 1 (statement -> function value option .)
+
+
+state 7
+
+    (2) option -> statement .
+
+    $end            reduce using rule 2 (option -> statement .)
+    RSQB            reduce using rule 2 (option -> statement .)
+
+
+state 8
+
+    (3) option -> loop .
+
+    $end            reduce using rule 3 (option -> loop .)
+    RSQB            reduce using rule 3 (option -> loop .)
+
+
+state 9
+
+    (4) option -> EMPTY .
+
+    $end            reduce using rule 4 (option -> EMPTY .)
+    RSQB            reduce using rule 4 (option -> EMPTY .)
+
+
+state 10
+
+    (8) loop -> LSQB . statement RSQB
+    (1) statement -> . function value option
+    (5) function -> . FORW
+
+    FORW            shift and go to state 3
+
+    statement                      shift and go to state 11
+    function                       shift and go to state 2
+
+state 11
+
+    (8) loop -> LSQB statement . RSQB
+
+    RSQB            shift and go to state 12
+
+
+state 12
+
+    (8) loop -> LSQB statement RSQB .
+
+    $end            reduce using rule 8 (loop -> LSQB statement RSQB .)
+    RSQB            reduce using rule 8 (loop -> LSQB statement RSQB .)
+
